@@ -240,7 +240,7 @@ namespace GameOfLife.UnitTests
 
             var result = simulation.GetCellSymbol(coordinate);
 
-            Assert.AreEqual(Constants.LiveCell, result);
+            Assert.AreEqual(Constants.Cell.LiveSymbol, result);
         }
 
         [Test]
@@ -254,7 +254,7 @@ namespace GameOfLife.UnitTests
 
             var result = simulation.GetCellSymbol(coordinate);
 
-            Assert.AreEqual(Constants.DeadCell, result);
+            Assert.AreEqual(Constants.Cell.DeadSymbol, result);
         }
     }
 }

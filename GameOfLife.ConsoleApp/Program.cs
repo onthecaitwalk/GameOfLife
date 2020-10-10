@@ -13,14 +13,15 @@ namespace GameOfLife.ConsoleApp
         private static void Main(string[] args)
         {
             int runs = 0;
+            var numberOfGenerations = GetUserInput(Constants.UserMessage.NumberOfGenerations);
             var board = new Board
             {
-                Height = GetDimension("height", "10"),
-                Width = GetDimension("width", "30")
+                Height = GetUserInput(Constants.UserMessage.BoardHeight),
+                Width = GetUserInput(Constants.UserMessage.BoardWidth)
             };
             LifeSimulation sim = new LifeSimulation(board);
-
-            while (runs++ < Constants.MaxRuns)
+                       
+            while (runs++ < numberOfGenerations)
             {
                 sim.Generate();
 
@@ -30,23 +31,18 @@ namespace GameOfLife.ConsoleApp
             Console.ReadLine();
         }
 
-        private static int GetDimension(string input, string example)
+        private static int GetUserInput(string userMessage)
         {
-            int dimension;
+            int parsedInput;
             string userInput;
             do
             {
-                userInput = GetUserInput(input, example);
-            } while (!int.TryParse(userInput, out dimension));
+                Console.WriteLine(userMessage);
+                userInput = Console.ReadLine().Trim();
+            } while (!int.TryParse(userInput, out parsedInput));
 
             Console.Clear();
-            return dimension;
-        }
-
-        private static string GetUserInput(string input, string example)
-        {
-            Console.WriteLine($"\nPlease enter the {input} of the board you would like to create: (example: {example})");
-            return Console.ReadLine().Trim();
+            return parsedInput;
         }
     }
 }

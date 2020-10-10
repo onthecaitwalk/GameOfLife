@@ -91,7 +91,7 @@ namespace GameOfLife.ConsoleApp
 
         internal string GetCellSymbol(Coordinate coordinate)
         {
-            return _board.IsCellAlive(coordinate) ? Constants.LiveCell : Constants.DeadCell;
+            return _board.IsCellAlive(coordinate) ? Constants.Cell.LiveSymbol : Constants.Cell.DeadSymbol;
         }
 
         /// <summary>
