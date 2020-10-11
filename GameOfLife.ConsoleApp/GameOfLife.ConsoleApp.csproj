@@ -48,7 +48,6 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Coordinate.cs" />
     <Compile Include="IBoard.cs" />
-    <Compile Include="ILifeSimulation.cs" />
     <Compile Include="LifeSimulation .cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

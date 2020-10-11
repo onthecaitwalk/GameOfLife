@@ -19,11 +19,11 @@ namespace GameOfLife.ConsoleApp
                 Height = GetUserInput(Constants.UserMessage.BoardHeight),
                 Width = GetUserInput(Constants.UserMessage.BoardWidth)
             };
-            LifeSimulation sim = new LifeSimulation(board);
+            LifeSimulation lifeSimulation = new LifeSimulation(board);
                        
             while (runs++ < numberOfGenerations)
             {
-                sim.Generate();
+                lifeSimulation.Generate();
 
                 // Give the user a chance to view the game in a more reasonable speed.
                 System.Threading.Thread.Sleep(100);

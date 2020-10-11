@@ -2,7 +2,7 @@
 
 namespace GameOfLife.ConsoleApp
 {
-    public class LifeSimulation : ILifeSimulation
+    public class LifeSimulation
     {
         private readonly IBoard _board;
 
