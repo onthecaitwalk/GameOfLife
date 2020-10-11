@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="Cell.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Coordinate.cs" />
     <Compile Include="IBoard.cs" />

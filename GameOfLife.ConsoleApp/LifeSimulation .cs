@@ -34,33 +34,10 @@ namespace GameOfLife.ConsoleApp
                 for (int j = 0; j < _board.Width; j++)
                 {
                     var coordinate = new Coordinate { X = i, Y = j };
-                    TransitionCell(coordinate, NumberOfLiveNeighbours(coordinate));
+                    var cell = _board.GetCell(coordinate);
+                    cell.Transition(NumberOfLiveNeighbours(coordinate));
                 }
             }
-        }
-
-        internal void TransitionCell(Coordinate coordinate, int numberOfLiveNeighbours)
-        {
-            if (ShouldCellTransitionToAlive(coordinate, numberOfLiveNeighbours))
-            {
-                _board.SetCellToDead(coordinate);
-            }
-            else if (ShouldCellTransitionToDead(coordinate, numberOfLiveNeighbours))
-            {
-                _board.SetCellToAlive(coordinate);
-            }
-        }
-
-        internal bool ShouldCellTransitionToAlive(Coordinate coordinate, int numberOfLiveNeighbours)
-        {
-            return _board.IsCellAlive(coordinate) &&
-                (numberOfLiveNeighbours < 2 || numberOfLiveNeighbours > 3);
-        }
-
-        internal bool ShouldCellTransitionToDead(Coordinate coordinate, int numberOfLiveNeighbours)
-        {
-            return !_board.IsCellAlive(coordinate) &&
-                   numberOfLiveNeighbours == 3;
         }
 
         /// <summary>
@@ -80,18 +57,13 @@ namespace GameOfLife.ConsoleApp
                     {
                         if (!((i == coordinate.X) && (j == coordinate.Y)))
                         {
-                            var currentCellCoordinate = new Coordinate { X = i, Y = j };
-                            if (_board.IsCellAlive(currentCellCoordinate)) numberOfLiveNeighbours++;
+                            var cell = _board.GetCell(new Coordinate { X = i, Y = j });
+                            if (cell.IsAlive) numberOfLiveNeighbours++;
                         }
                     }
                 }
             }
             return numberOfLiveNeighbours;
-        }
-
-        internal string GetCellSymbol(Coordinate coordinate)
-        {
-            return _board.IsCellAlive(coordinate) ? Constants.Cell.LiveSymbol : Constants.Cell.DeadSymbol;
         }
 
         /// <summary>
@@ -104,7 +76,8 @@ namespace GameOfLife.ConsoleApp
                 for (int j = 0; j < _board.Width; j++)
                 {
                     var coordinate = new Coordinate { X = i, Y = j };
-                    Console.Write(GetCellSymbol(coordinate));
+                    var cell = _board.GetCell(coordinate);
+                    Console.Write(cell.Symbol);
                     if (j == _board.Width - 1) Console.WriteLine("\r");
                 }
             }

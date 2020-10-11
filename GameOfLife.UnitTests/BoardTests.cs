@@ -24,7 +24,7 @@ namespace GameOfLife.UnitTests
                 Width = _fixture.Create<int>()
             };
 
-            Assert.IsEmpty(board.Cells);
+            Assert.IsEmpty(board.Cells, "Should not generate cells if height is zero.");
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace GameOfLife.UnitTests
                 Width = 0
             };
 
-            Assert.IsEmpty(board.Cells);
+            Assert.IsEmpty(board.Cells, "Should not generate cells if width is zero.");
         }
 
         [Test]
@@ -50,14 +50,14 @@ namespace GameOfLife.UnitTests
 
             Assert.Multiple(() =>
             {
-                Assert.AreEqual(2, board.Cells.GetLength(0));
-                Assert.AreEqual(3, board.Cells.GetLength(1));
-                Assert.AreEqual(6, board.Cells.Length);
+                Assert.AreEqual(2, board.Cells.GetLength(0), "Should set first dimension of cells to height.");
+                Assert.AreEqual(3, board.Cells.GetLength(1), "Should set second dimension of cells to width.");
+                Assert.AreEqual(6, board.Cells.Length, "Should set total cells to height * width.");
             });
         }
 
         [Test]
-        public void GenerateCells_HeightAndWidthAreGreaterThanZero_ReturnsCells_HeightIsFirstDimension_WidthIsSecondDimension_PopulatedWithBools()
+        public void GenerateCells_HeightAndWidthAreGreaterThanZero_ReturnsCells_HeightIsFirstDimension_WidthIsSecondDimension_PopulatedWithCells()
         {
             var board = new Board
             {
@@ -67,12 +67,12 @@ namespace GameOfLife.UnitTests
 
             Assert.Multiple(() =>
             {
-                Assert.IsInstanceOf<bool>(board.Cells[0, 0]);
-                Assert.IsInstanceOf<bool>(board.Cells[0, 1]);
-                Assert.IsInstanceOf<bool>(board.Cells[0, 2]);
-                Assert.IsInstanceOf<bool>(board.Cells[1, 0]);
-                Assert.IsInstanceOf<bool>(board.Cells[1, 1]);
-                Assert.IsInstanceOf<bool>(board.Cells[1, 2]);
+                Assert.IsInstanceOf<Cell>(board.Cells[0, 0], "Should populate with instance of cell.");
+                Assert.IsInstanceOf<Cell>(board.Cells[0, 1], "Should populate with instance of cell.");
+                Assert.IsInstanceOf<Cell>(board.Cells[0, 2], "Should populate with instance of cell.");
+                Assert.IsInstanceOf<Cell>(board.Cells[1, 0], "Should populate with instance of cell.");
+                Assert.IsInstanceOf<Cell>(board.Cells[1, 1], "Should populate with instance of cell.");
+                Assert.IsInstanceOf<Cell>(board.Cells[1, 2], "Should populate with instance of cell.");
             });
         }
     }
